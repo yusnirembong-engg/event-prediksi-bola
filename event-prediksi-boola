@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <title>Prediksi Skor · Komunitas Olahraga</title>
+    <!-- Font Modern: Inter & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* RESET & VARIABLES - PRESISI SPACING */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-navy: #0a101c;
+            --deep-blue: #0e1a2b;
+            --accent-cyan: #2ad4b6;
+            --accent-blue: #3e9ed6;
+            --accent-green: #1f8b5c;
+            --accent-orange: #ff8c42;
+            --glass-bg: rgba(18, 28, 40, 0.8);
+            --glass-border: rgba(64, 224, 240, 0.15);
+            --shadow-heavy: 0 25px 40px -15px rgba(0,0,0,0.8);
+            --shadow-soft: 0 15px 30px -10px rgba(0,0,0,0.5);
+            --font-heading: 'Poppins', 'Inter', sans-serif;
+            --font-body: 'Inter', 'Poppins', sans-serif;
+            --spacing-section: 4.5rem;
+            --spacing-mobile: 2.8rem;
+        }
+
+        body {
+            background: var(--dark-navy);
+            font-family: var(--font-body);
+            color: #ffffff;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .landing-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.8rem 2rem;
+        }
+
+        /* RESPONSIVE PADDING - PRESISI */
+        @media (max-width: 480px) {
+            .landing-wrapper {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        /* ANIMASI FADE HALUS */
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero, .cards-grid, .keunggulan-grid, .admin-cta-wrapper, .event-section, .syarat-section, .social-section {
+            animation: fadeSlide 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+        }
+
+        /* ===== 1. HERO SECTION - PROPORSI SEMPURNA ===== */
+        .hero {
+            position: relative;
+            border-radius: 36px;
+            overflow: hidden;
+            padding: 5rem 2.5rem;
+            margin-bottom: var(--spacing-section);
+            background-image: url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=1923&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            box-shadow: var(--shadow-heavy);
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #0a121fe0 0%, #030b14f0 100%);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 8vw, 3.8rem);
+            font-weight: 800;
+            font-family: var(--font-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 25px rgba(0, 200, 255, 0.5);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(145deg, #b3ffd0, #6dc1ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 4vw, 1.45rem);
+            font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+            margin-bottom: 2.2rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* TOMBOL UTAMA - UKURAN PRESISI */
+        .btn-utama {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: linear-gradient(145deg, #1f8b5c, #0f6c9e);
+            background-size: 200% auto;
+            border: none;
+            border-radius: 60px;
+            padding: 1.1rem 2.8rem;
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 15px 30px -5px rgba(30, 144, 255, 0.4);
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-utama i {
+            font-size: 1.5em;
+        }
+
+        .btn-utama:hover {
+            background-position: right center;
+            box-shadow: 0 0 30px #3e9ed6, 0 10px 30px #0e5a4a;
+            transform: scale(1.03);
+        }
+
+        /* ===== 2. CARA BERMAIN - CARD SEIMBANG ===== */
+        .section-title {
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: white;
+            text-shadow: 0 0 12px rgba(42, 212, 182, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: var(--spacing-section);
+        }
+
+        .card-step {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 2.2rem 1.8rem;
+            flex: 1 1 260px;
+            max-width: 320px;
+            min-width: 260px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: 0.25s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-step:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
+            background: rgba(25, 45, 65, 0.95);
+        }
+
+        .card-icon {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px #2ad4b6;
+        }
+
+        .card-step h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+
+        .card-step p {
+            font-size: 1rem;
+            color: #d0e6f5;
+            line-height: 1.6;
+        }
+
+        .highlight-social {
+            color: #a6f0ff;
+            font-weight: 600;
+            background: rgba(0,180,255,0.15);
+            padding: 0.2rem 0.4rem;
+            border-radius: 12px;
+        }
+
+        /* ===== 3. KEUNGGULAN - TANPA KATA GRATIS ===== */
+        .keunggulan-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .keunggulan-item {
+            background: rgba(12, 25, 38, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 1.2rem 1.8rem;
+            flex: 0 1 auto;
+            min-width: 260px;
+            max-width: 340px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            border: 1px solid #2b5f70;
+            box-shadow: 0 12px 22px -10px #00000080;
+            transition: 0.2s;
+        }
+
+        .keunggulan-item:hover {
+            background: #153243;
+            border-color: #52d0d0;
+        }
+
+        .keunggulan-icon {
+            font-size: 2rem;
+            min-width: 48px;
+            text-align: center;
+            color: #a1ffd6;
+        }
+
+        .keunggulan-item span {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #f5faff;
+            line-height: 1.3;
+        }
+
+        /* ===== 4. ADMIN CTA - HUBUNGI UNTUK INFO LENGKAP ===== */
+        .admin-cta-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .admin-card {
+            background: linear-gradient(145deg, #0e2a3b, #0a1f2c);
+            border: 1px solid #3fa5b5;
+            border-radius: 70px;
+            padding: 1.2rem 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 35px rgba(0,200,255,0.2);
+        }
+
+        .admin-text {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2f3ff;
+        }
+
+        .admin-text i {
+            color: #ffd966;
+            font-size: 2rem;
+        }
+
+        .btn-admin {
+            background: linear-gradient(145deg, #00a8b0, #00717e);
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 10px 20px #004c54;
+            transition: 0.25s;
+            border: 1px solid #7fe0e0;
+        }
+
+        .btn-admin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00d4d4;
+            background: #008c9e;
+        }
+
+        /* ===== 5. TOMBOL EVENT SPESIAL - PROPORSI ===== */
+        .event-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: var(--spacing-section);
+        }
+
+        .btn-event {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: linear-gradient(145deg, #ff8c42, #d94e1f);
+            background-size: 200% auto;
+            border: none;
+            border-radius: 60px;
+            padding: 1.1rem 3rem;
+            font-size: clamp(1.3rem, 5vw, 1.7rem);
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 15px 30px -5px #c44536b0;
+            transition: 0.3s;
+            border: 1px solid rgba(255,200,150,0.3);
+        }
+
+        .btn-event:hover {
+            background-position: right center;
+            box-shadow: 0 0 35px #ff884d;
+            transform: scale(1.06);
+        }
+
+        /* ===== 6. SYARAT & KETENTUAN - HUBUNGI ADMIN INFO ===== */
+        .syarat-section {
+            background: rgba(8, 22, 34, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 2.5rem 2.5rem;
+            margin-bottom: var(--spacing-section);
+            border: 1px solid #3e92a0;
+            text-align: center;
+        }
+
+        .syarat-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #b3f0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+
+        .syarat-list {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: left;
+            color: #d0e6f0;
+            font-size: 1.05rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            background: rgba(0,0,0,0.25);
+            padding: 1.8rem 2.2rem;
+            border-radius: 36px;
+        }
+
+        .syarat-list li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            list-style: none;
+        }
+
+        .syarat-list i {
+            color: #4ad4d4;
+            min-width: 24px;
+        }
+
+        /* TOMBOL INFO ADMIN DI DALAM SYARAT & KETENTUAN */
+        .info-admin-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: rgba(0,170,200,0.2);
+            border: 1px solid #2ad4b6;
+            border-radius: 40px;
+            padding: 0.6rem 1.5rem;
+            color: #b6ffff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            margin-left: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .info-admin-btn:hover {
+            background: rgba(0,200,210,0.4);
+            color: white;
+            border-color: #7fffd4;
+        }
+
+        /* ===== 7. SOCIAL MEDIA - RESPONSIF SEMPURNA ===== */
+        .social-section {
+            background: rgba(8, 22, 36, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 3rem 2.5rem;
+            border: 1px solid #33bbbb30;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .social-header {
+            font-size: clamp(1.8rem, 6vw, 2.2rem);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 0 15px #2ad4c0;
+            flex-wrap: wrap;
+        }
+
+        .social-sub {
+            text-align: center;
+            color: #cce4ff;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            margin-bottom: 2.8rem;
+            font-weight: 500;
+        }
+
+        .social-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            min-width: 100px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(70px, 12vw, 80px);
+            height: clamp(70px, 12vw, 80px);
+            background: #1f3045;
+            border-radius: 50%;
+            font-size: clamp(2.2rem, 5vw, 2.8rem);
+            color: white;
+            text-decoration: none;
+            transition: 0.25s;
+            box-shadow: 0 12px 20px -8px black;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .social-icon.instagram:hover {
+            background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB);
+            box-shadow: 0 0 35px #d62976;
+            transform: scale(1.12);
+        }
+        .social-icon.telegram:hover {
+            background: #0088cc;
+            box-shadow: 0 0 35px #0088cc;
+            transform: scale(1.12);
+        }
+        .social-icon.facebook:hover {
+            background: #1877f2;
+            box-shadow: 0 0 35px #1877f2;
+            transform: scale(1.12);
+        }
+        .social-icon.tiktok:hover {
+            background: #010101;
+            box-shadow: 0 0 30px #ff0050, 0 0 30px #00f2ea;
+            transform: scale(1.12);
+        }
+
+        .social-handle {
+            font-size: 0.85rem;
+            background: #101f2ed0;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            color: #e0f0ff;
+            border: 1px solid #3f9fbf;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c93a8;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ===== RESPONSIVE - PRESISI MOBILE ===== */
+        @media (max-width: 640px) {
+            .landing-wrapper {
+                padding: 1rem 1rem;
+            }
+            
+            .hero {
+                padding: 2.8rem 1.2rem;
+                border-radius: 28px;
+                margin-bottom: var(--spacing-mobile);
+            }
+            
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            
+            .btn-utama, .btn-event {
+                width: 100%;
+                max-width: 300px;
+                padding: 1rem 1.8rem;
+                font-size: 1.2rem;
+            }
+            
+            .cards-grid { gap: 1.5rem; margin-bottom: var(--spacing-mobile); }
+            .card-step { max-width: 100%; padding: 2rem 1.2rem; }
+            
+            .keunggulan-grid { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 1rem; 
+                margin-bottom: 2rem;
+            }
+            .keunggulan-item { 
+                width: 100%; 
+                max-width: 380px; 
+            }
+            
+            .admin-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1.2rem;
+                gap: 1.2rem;
+                border-radius: 50px;
+            }
+            .admin-text { font-size: 1.2rem; }
+            .btn-admin { padding: 0.8rem 1.8rem; font-size: 1.1rem; }
+            
+            .syarat-section { padding: 1.8rem 1.2rem; }
+            .syarat-list { padding: 1.2rem; }
+            
+            .social-flex { 
+                flex-direction: column; 
+                gap: 1.5rem; 
+            }
+            .social-item { 
+                flex-direction: row; 
+                width: 100%; 
+                justify-content: center; 
+                gap: 1.2rem; 
+            }
+            .social-icon { 
+                width: 60px; 
+                height: 60px; 
+                font-size: 2rem; 
+            }
+            .social-handle { 
+                font-size: 0.8rem; 
+            }
+            .social-section { padding: 2rem 1.2rem; }
+        }
+
+        @media (max-width: 380px) {
+            .hero h1 { font-size: 1.7rem; }
+            .btn-admin { font-size: 1rem; padding: 0.7rem 1.2rem; }
+            .admin-text { font-size: 1.1rem; flex-wrap: wrap; justify-content: center; }
+        }
+
+        a { text-decoration: none; }
+        
+        /* TIDAK ADA KATA GRATIS SAMA SEKALI */
+        /* SEMUA MERUJUK KE ADMIN UNTUK INFO LENGKAP */
+    </style>
+</head>
+<body>
+    <div class="landing-wrapper">
+        <!-- 1️⃣ HERO SECTION - TOMBOL UTAMA PRESISI -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>
+                    Tunjukkan Instingmu <br>dalam <span>Prediksi Skor!</span>
+                </h1>
+                <p>
+                    Ikuti challenge prediksi pertandingan dan raih hadiah menarik setiap minggunya.
+                </p>
+                <a href="https://api.whatsapp.com/send/?phone=6281263725844&text&type=phone_number&app_absent=0"
+                class="btn-utama"
+                target="_blank"
+                rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Ikuti Prediksi Sekarang
+                </a>
+            </div>
+        </div>
+
+        <!-- 2️⃣ CARA BERMAIN - TEKS SOSIAL MEDIA -->
+        <div class="section-title">
+            <i class="fas fa-compass" style="color: #2ad4b6;"></i> Cara Bermain
+        </div>
+        <div class="cards-grid">
+            <div class="card-step">
+                <div class="card-icon"><i class="fas fa-tv"></i></div>
+                <h3>Pilih pertandingan</h3>
+                <p>Event akan disiarkan di <strong class="highlight-social">setiap social media kami</strong>. Pantau Instagram, Telegram, Facebook & TikTok untuk jadwal lengkap!</p>
+            </div>
+            <div class="card-step">
+                <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
+                <h3>Masukkan prediksi skor</h3>
+                <p>Isi skor akhir melalui link yang tersedia, ramalkan hasil dengan insting olahragamu.</p>
+            </div>
+            <div class="card-step">
+                <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                <h3>Dapatkan kesempatan hadiah</h3>
+                <p>Prediksi tepat masuk undian mingguan. Hubungi admin jika namamu diumumkan sebagai pemenang.</p>
+            </div>
+        </div>
+
+        <!-- 3️⃣ KEUNGGULAN - TANPA KATA "GRATIS" -->
+        <div class="section-title">
+            <i class="fas fa-shield-alt" style="color: #5ecf9a;"></i> Kenapa Bergabung?
+        </div>
+        <div class="keunggulan-grid">
+            <div class="keunggulan-item">
+                <div class="keunggulan-icon"><i class="fas fa-user-plus"></i></div>
+                <span>🎯 Pendaftaran terbuka untuk umum</span>
+            </div>
+            <div class="keunggulan-item">
+                <div class="keunggulan-icon"><i class="fas fa-gift"></i></div>
+                <span>🏆 Hadiah menarik setiap periode</span>
+            </div>
+            <div class="keunggulan-item">
+                <div class="keunggulan-icon"><i class="fas fa-mobile-alt"></i></div>
+                <span>📱 Bisa diakses melalui smartphone</span>
+            </div>
+            <div class="keunggulan-item">
+                <div class="keunggulan-icon"><i class="fas fa-users"></i></div>
+                <span>👥 Komunitas pecinta olahraga</span>
+            </div>
+            <div class="keunggulan-item">
+                <div class="keunggulan-icon"><i class="fas fa-headset"></i></div>
+                <span>📞 Info lengkap hubungi admin</span>
+            </div>
+        </div>
+
+        <!-- 4️⃣ ADMIN CTA UTAMA - HUBUNGI ADMIN INFO LENGKAP -->
+        <div class="admin-cta-wrapper">
+            <div class="admin-card">
+                <div class="admin-text">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Butuh informasi lengkap?</span>
+                </div>
+                <a href="https://api.whatsapp.com/send/?phone=6281263725844&text&type=phone_number&app_absent=0" class="btn-admin">
+                    <i class="fas fa-headset"></i> Hubungi Admin Sekarang
+                </a>
+            </div>
+        </div>
+
+        <!-- 5️⃣ TOMBOL EVENT SPESIAL -->
+        <div class="event-section">
+            <a href="https://event.siteq.info/bolapelangi2/claim-parlay-lose1/" class="btn-event">
+                <i class="fas fa-calendar-star"></i> Lihat Event Spesial
+            </a>
+        </div>
+
+        <!-- 6️⃣ SYARAT & KETENTUAN - DENGAN LINK ADMIN -->
+        <div class="syarat-section">
+            <div class="syarat-title">
+                <i class="fas fa-file-contract"></i> Syarat & Ketentuan
+            </div>
+            <ul class="syarat-list">
+                <li><i class="fas fa-check-circle"></i> Peserta wajib follow Official Social Media.</li>
+                <li><i class="fas fa-check-circle"></i> 1 akun hanya bisa 1 prediksi per pertandingan.</li>
+                <li><i class="fas fa-check-circle"></i> Prediksi harus dikirim sebelum pertandingan dimulai.</li>
+                <li><i class="fas fa-check-circle"></i> Pemenang akan diumumkan melalui Instagram Story.</li>
+                <li><i class="fas fa-check-circle"></i> Hadiah tidak dapat diuangkan dan diklaim maksimal 1x24 jam.</li>
+                <li><i class="fas fa-check-circle"></i> Untuk informasi lebih lengkap, silakan <a href="#" style="color:#7fffd4; font-weight:600; text-decoration:underline;">hubungi admin</a>.</li>
+            </ul>
+            <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                <a href="#" class="info-admin-btn">
+                    <i class="fas fa-comment-dots"></i> Tanya Admin via Telegram
+                </a>
+            </div>
+        </div>
+
+        <!-- 7️⃣ OFFICIAL SOCIAL MEDIA -->
+        <div class="social-section">
+            <div class="social-header">
+                <i class="fas fa-bolt"></i> Official Social Media <i class="fas fa-bolt"></i>
+            </div>
+            <div class="social-sub">
+                📢 Follow kami untuk update challenge terbaru dan info hadiah!
+            </div>
+            <div class="social-flex">
+                <div class="social-item">
+                    <a href="https://www.instagram.com/duniasepakbola.2/" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <span class="social-handle">@duniasepakbola.2</span>
+                </div>
+                <div class="social-item">
+                    <a href="https://t.me/DuniaSepakBola2" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <span class="social-handle">@DuniaSepakBola2</span>
+                </div>
+                <div class="social-item">
+                    <a href="https://web.facebook.com/InfoBolaHarian2?_rdc=1&_rdr#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <span class="social-handle">Info Bola Harian </span>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.tiktok.com/@duniasepakbola.2" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+                    <span class="social-handle">@duniasepakbola.2</span>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2.2rem; color: #b0e0ff; border-top: 1px dashed #2b6f8a; padding-top: 1.8rem;">
+                <i class="fas fa-heart" style="color: #ff8f8f;"></i> Ikuti sekarang dan jadi bagian komunitas!
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ⚡ platform prediksi komunitas · sport entertainment ⚡
+        </div>
+    </div>
+    
+    <!-- ===== REVISI SEMPURNA ===== -->
+    <!-- ✅ TIDAK ADA KATA "GRATIS" DI SELURUH HALAMAN -->
+    <!-- ✅ SEMUA INFORMASI LENGKAP MERUJUK "HUBUNGI ADMIN" -->
+    <!-- ✅ PENEMPATAN BUTTON PRESISI, SPACING SEIMBANG, RESPONSIF SEMPURNA -->
+    <!-- ✅ TIDAK ADA SISTEM POIN/PRESTASI/LEADERBOARD -->
+</body>
+</html>
